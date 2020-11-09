@@ -1,0 +1,11 @@
+data/
+public/
+mysql_data/
+*.swp
+*.log
+.DS_Store
+ssdb/ssdb_home/
+mysql/mysql_init/
+ssdb_home/
+development/ssdb/ssdb_home/meta
+public/

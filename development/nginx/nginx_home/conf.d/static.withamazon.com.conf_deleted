@@ -1,0 +1,34 @@
+
+# Nginx configuration
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name static.withamazon.com;
+
+    index index.html;
+    error_log  /var/log/nginx/photo_error.log;
+    access_log /var/log/nginx/photo_access.log;
+    root /var/www/html/public;
+	client_max_body_size 10M;
+    #auth_request /auth;
+    location /s1/ {
+        proxy_pass http://localhost:8080/;   
+    }
+    location /s2/ {
+	proxy_pass http://localhost:8181/;	
+    }
+    location /upload {       
+       auth_request /auth;	
+       #pass to seaweedfs master
+      # client_max_body_size 10M;
+       proxy_pass http://localhost:9333/submit;
+    }
+    location /auth {
+    	internal;
+    	proxy_pass http://dev.withamazon.com/api/user/auth/check_session;
+    	proxy_pass_request_body off;
+    	proxy_set_header        Content-Length "";
+    	proxy_set_header        X-Original-URI $request_uri;
+    }	
+}

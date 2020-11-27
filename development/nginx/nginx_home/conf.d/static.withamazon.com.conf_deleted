@@ -4,7 +4,7 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name static.withamazon.com;
+    server_name static.localhost;
 
     index index.html;
     error_log  /var/log/nginx/photo_error.log;
@@ -26,7 +26,7 @@ server {
     }
     location /auth {
     	internal;
-    	proxy_pass http://dev.withamazon.com/api/user/auth/check_session;
+    	proxy_pass http://localhost/api/user/auth/check_session;
     	proxy_pass_request_body off;
     	proxy_set_header        Content-Length "";
     	proxy_set_header        X-Original-URI $request_uri;

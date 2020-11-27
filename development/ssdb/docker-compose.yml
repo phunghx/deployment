@@ -7,5 +7,5 @@ services:
      - "8888:8888"
     volumes:
       - ./ssdb.conf:/etc/ssdb.conf  
-      - ./ssdb_home:/var/lib/ssdb
+      # - ./ssdb_home:/var/lib/ssdb
 

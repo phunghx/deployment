@@ -10,12 +10,15 @@ services:
       - xpack.ml.enabled=false
       - xpack.graph.enabled=false
       - xpack.watcher.enabled=false      
-      - bootstrap.memory_lock=true
+      - bootstrap.memory_lock=false
       - ES_JAVA_OPTS=-Xms1G -Xmx1G
       - discovery.zen.minimum_master_nodes=1
       - discovery.type=single-node  
     ulimits:
       nproc: 65535
+      nofile:
+        soft: 65536
+        hard: 65536
       memlock:
         soft: -1
         hard: -1
@@ -30,9 +33,9 @@ services:
     #    max_attempts: 3
     #    window: 120s
     volumes:
-      - ./eshome/data:/usr/share/elasticsearch/data
+      # - ./eshome/data:/usr/share/elasticsearch/data
       - ./eshome/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./eshome/logs:/usr/share/elasticsearch/logs
+      # - ./eshome/logs:/usr/share/elasticsearch/logs
     ports:
       - 9200:9200
       - 9300:9300
